@@ -66,6 +66,17 @@ class Product
     private $category;
 
     /**
+     * Many Users have Many Groups.
+     * @ORM\ManyToMany(targetEntity="App\Entity\Cart", inversedBy="products")
+     * @ORM\JoinTable(name="products_carts")
+     */
+    private $carts;
+
+    public function __construct() {
+        $this->carts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -176,4 +187,26 @@ class Product
     {
         $this->category = $category;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCarts()
+    {
+        return $this->carts;
+    }
+
+    /**
+     * @param mixed $carts
+     */
+    public function setCarts($carts): void
+    {
+        $this->carts = $carts;
+    }
+
+    public function addCart(Cart $cart)
+    {
+        $this->carts[] = $cart;
+    }
+
 }
