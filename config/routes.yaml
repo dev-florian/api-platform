@@ -5,3 +5,8 @@
 login_check:
   path:     /login_check
   methods: [POST]
+
+easy_admin_bundle:
+  resource: '@EasyAdminBundle/Controller/EasyAdminController.php'
+  prefix: /admin
+  type: annotation

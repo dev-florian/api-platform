@@ -1,0 +1,13 @@
+easy_admin:
+    site_name: 'BackEnd'
+    entities:
+        Customer:
+            class: App\Entity\Customer
+        Cart:
+            class: App\Entity\Cart
+        Product:
+            class: App\Entity\Product
+        Category:
+            class: App\Entity\Category
+        User:
+            class: App\Entity\User
