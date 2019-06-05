@@ -12,7 +12,8 @@ Récupérer le projet :
 2 - ( Gitbash ) command : php bin/console server:run
 3 - ( Gitbash ) Si la base n'a jamais été créé : php bin/console doctrine:database:create
 4 - ( Gitbash ) Si le schema n'a jamais été créé : php bin/console doctrine:schema:create
-4 - Le lancer sur le navigateur
+5 - ( Gitbash ) Si les tables ne sont pas créer ( ou pas à jour ) php bin/console doctrine:schema:update --force
+6 - Le lancer sur le navigateur
 
 Faire un CRUD avec PostMan :
 
