@@ -12,28 +12,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class AuthController extends AbstractController
 {
 
-//    /**
-//     * @Route("/register", methods={"POST"})
-//     */
-//    public function register(Request $request, UserPasswordEncoderInterface $encoder)
-//    {
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $username = $request->request->get('_username');
-//        $password = $request->request->get('_password');
-//
-//        $user = new User($username);
-//        $user->setPassword($encoder->encodePassword($user, $password));
-//        $em->persist($user);
-//        $em->flush();
-//        return new Response(sprintf('User %s successfully created', $user->getUsername()));
-//    }
-//
-//    /**
-//     * @Route("/api")
-//     */
-//    public function api()
-//    {
-//        return new Response(sprintf('Logged in as %s', $this->getUser()->getUsername()));
-//    }
+    /**
+     * @Route("/register", name="register", methods={"POST"})
+     */
+    public function register(Request $request, UserPasswordEncoderInterface $encoder)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $username = $request->get('username');
+        $password = $request->get('password');
+        $name = $request->get('name');
+
+        $user = new User($username, $name);
+        $user->setPassword($encoder->encodePassword($user, $password));
+        $em->persist($user);
+        $em->flush();
+        return new Response(sprintf('User %s successfully created', $user->getUsername()));
+    }
+
+    public function api()
+    {
+        return new Response(sprintf('Logged in as %s', $this->getUser()->getUsername()));
+    }
 }

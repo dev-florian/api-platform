@@ -38,10 +38,11 @@ class User implements UserInterface
      */
     private $isActive;
 
-    public function __construct($username)
+    public function __construct($username, $name)
     {
         $this->isActive = true;
         $this->username = $username;
+        $this->name = $name;
     }
 
     /**

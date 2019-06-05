@@ -40,3 +40,9 @@ Mettre cette url : http://127.0.0.1:8000/api/products/1
 {
     "category": "/api/categories/1"
 }
+
+
+ACCEDER A ^/API AVEC UN TOKEN
+1/ Se créer le compte avec la route register...
+2/ http://127.0.0.1:8000/login_check avec {"username": "", "password": ""} pour générer un token
+3/ Ajouter le token au header ( POSTMAN : Allez dans Auth -> Baerer Token Et entrer le token
