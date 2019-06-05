@@ -99,5 +99,8 @@ class Cart
         $this->products[] = $product;
     }
 
-
+    public function __toString()
+    {
+        return (string)$this->id;
+    }
 }

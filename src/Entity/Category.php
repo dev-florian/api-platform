@@ -92,6 +92,8 @@ class Category
         $this->products = $products;
     }
 
-
+    public function __toString() {
+        return $this->name;
+    }
 
 }
