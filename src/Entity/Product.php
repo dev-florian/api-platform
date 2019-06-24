@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="product")
- * @ApiResource
  * @ORM\Entity
  */
 class Product

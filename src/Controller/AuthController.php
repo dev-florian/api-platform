@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,7 @@ class AuthController extends AbstractController
 {
 
     /**
-     * @Route("/register", name="register", methods={"POST"})
+     * @Route("/user/register", name="register", methods={"POST"})
      */
     public function register(Request $request, UserPasswordEncoderInterface $encoder)
     {
@@ -23,7 +24,9 @@ class AuthController extends AbstractController
         $password = $request->get('password');
         $name = $request->get('name');
 
-        $user = new User($username, $name);
+        $user = new User();
+        $user->setUsername($username);
+        $user->setName($name);
         $user->setPassword($encoder->encodePassword($user, $password));
         $em->persist($user);
         $em->flush();

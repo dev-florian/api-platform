@@ -2,12 +2,23 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Table(name="user")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ApiResource(
+ *     attributes={"access_control"="is_granted('ROLE_USER')"},
+ *     itemOperations={
+ *         "delete"={"access_control"="is_granted('ROLE_ADMIN')", "access_control_message"="Only admins."},
+ *         "get"={"access_control"="is_granted('ROLE_ADMIN')", "access_control_message"="Only admins."}
+ *     },
+ *      collectionOperations={
+ *         "get"={"access_control"="is_granted('ROLE_ADMIN')", "access_control_message"="Only admins."}
+ *     }
+ * )
  */
 class User implements UserInterface
 {
@@ -38,11 +49,15 @@ class User implements UserInterface
      */
     private $isActive;
 
-    public function __construct($username, $name)
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles;
+
+    public function __construct()
     {
         $this->isActive = true;
-        $this->username = $username;
-        $this->name = $name;
+        $this->roles [] = 'ROLE_USER';
     }
 
     /**
@@ -127,7 +142,8 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        $roles = $this->roles;
+        return $roles;
     }
 
     public function eraseCredentials()
@@ -137,5 +153,14 @@ class User implements UserInterface
     public function getSalt()
     {
         // TODO: Implement getSalt() method.
+    }
+
+    public function setRole(array $roles)
+    {
+        foreach ($roles as $role) {
+            if (!in_array($role, $this->roles)) {
+                $this->roles [] = $role;
+            }
+        }
     }
 }
