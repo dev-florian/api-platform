@@ -14,46 +14,42 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="product")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
+ * @ApiResource
  */
-class Product
+class Product extends BaseEntity
 {
     /**
-     * @var int $id
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(name="id", type="integer")
-     */
-    private $id;
-
-    /**
      * @var string $name
+     * @Assert\NotBlank
      * @ORM\Column(name="name", type="string")
      */
     private $name;
 
     /**
      * @var string $description
+     * @Assert\NotBlank
      * @ORM\Column(name="description", type="string")
      */
     private $description;
 
     /**
      * @var int $price
+     * @Assert\NotBlank
      * @ORM\Column(name="price", type="integer")
      */
     private $price;
 
     /**
      * @var int $stock
+     * @Assert\NotBlank
      * @ORM\Column(name="stock", type="integer")
      */
     private $stock;
 
     /**
      * @var string $picture
-     * @ORM\Column(name="picture", type="string")
+     * @ORM\Column(name="picture", type="string", nullable=true)
      */
     private $picture;
 
@@ -73,22 +69,6 @@ class Product
 
     public function __construct() {
         $this->carts = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
     }
 
     /**

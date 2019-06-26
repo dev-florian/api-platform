@@ -2,13 +2,13 @@
 
 namespace App\Repository;
 
-use App\Entity\User;
+use App\Entity\Cart;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Florian THUBÉ
  */
-class UserRepository extends BaseRepository
+class ProduitRepository extends BaseRepository
 {
 }

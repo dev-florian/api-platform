@@ -16,39 +16,13 @@ use Doctrine\ORM\Mapping as ORM;
  * @ApiResource
  * @ORM\Entity
  */
-class Customer
+class Customer extends BaseEntity
 {
-    /**
-     * @var int $id
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(name="id", type="integer")
-     */
-    private $id;
-
     /**
      * @var string $name
      * @ORM\Column(name="name", type="string")
      */
     private $name;
-
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
 
     /**
      * @return string
@@ -64,10 +38,5 @@ class Customer
     public function setName(string $name): void
     {
         $this->name = $name;
-    }
-
-    public function __toString()
-    {
-        return (string)$this->id;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="user")
@@ -20,26 +21,21 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *     }
  * )
  */
-class User implements UserInterface
+class User extends BaseEntity implements UserInterface
 {
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
     /**
      * @ORM\Column(type="string", unique=true)
      */
     private $username;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string")
      */
     private $password;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string")
      */
     private $name;
@@ -58,22 +54,6 @@ class User implements UserInterface
     {
         $this->isActive = true;
         $this->roles [] = 'ROLE_USER';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
     }
 
     /**

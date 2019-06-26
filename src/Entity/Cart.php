@@ -15,19 +15,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Table(name="cart")
  * @ApiResource
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CartRepository")
  */
-class Cart
+class Cart extends BaseEntity
 {
-    /**
-     * @var int $id
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(name="id", type="integer")
-     */
-    private $id;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Customer")
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
@@ -43,22 +34,6 @@ class Cart
 
     public function __construct() {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
     }
 
     /**
@@ -97,10 +72,5 @@ class Cart
     {
         $product->addCart($this); // synchronously updating inverse side
         $this->products[] = $product;
-    }
-
-    public function __toString()
-    {
-        return (string)$this->id;
     }
 }

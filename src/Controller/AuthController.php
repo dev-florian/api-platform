@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,11 +29,11 @@ class AuthController extends AbstractController
         $user->setPassword($encoder->encodePassword($user, $password));
         $em->persist($user);
         $em->flush();
-        return new Response(sprintf('User %s successfully created', $user->getUsername()));
+        return new Response(sprintf('User %s successfully created', $user->getUsername()), 200);
     }
 
     public function api()
     {
-        return new Response(sprintf('Logged in as %s', $this->getUser()->getUsername()));
+        return new Response(sprintf('Logged in as %s', $this->getUser()->getUsername()), 200);
     }
 }
